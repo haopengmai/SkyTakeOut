@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sky.mapper.EmployeeMapper">
     <select id="pageQuery" resultType="com.sky.entity.Employee">
-     select * from employee
+     select * from sky_take_out.employee
      <where>
          <if test="name != null and name != ''">
              and name like concat("%", #{name},"%")
@@ -14,7 +14,7 @@
 
 
     <update id="update" parameterType="com.sky.entity.Employee">
-        update employee
+        update sky_take_out.employee
         <set>
             <if test="name != null and name != ''">name =#{name},</if>
             <if test="username != null and username != ''">username =#{username},</if>

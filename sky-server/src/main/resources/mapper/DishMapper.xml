@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sky.mapper.DishMapper">
+    <insert id="insert" useGeneratedKeys="true">
+        insert into sky_take_out.dish (name, category_id, price, image, description, create_time, update_time,
+                                       create_user,
+                                       update_user, status)
+        values (#{name}, #{categoryId}, #{price}, #{image}, #{description}, #{createTime}, #{updateTime}, #{createUser},
+                #{updateUser}, #{status})
+    </insert>
+    
+    <select id="pageQuery" resultType="com.sky.vo.DishVO">
+        select d.*,c.name as categoryName from sky_take_out.dish d left join sky_take_out.category c on d.category_id = c.id
+        <where>
+            <if test="name!=null">
+                and d.name like concat('%',#{d.name},'%')
+            </if>
+            <if test="name!=null">
+                and d.name like concat('%',#{d.categoryId},'%')
+            </if>
+            <if test="name!=null">
+                and d.name like concat('%',#{d.status},'%')
+            </if>
+        </where>
+        order by d.create_time desc;
+    </select>
+
+    <delete id="deleteByIds" >
+        delete from sky_take_out.dish where id in
+        <foreach collection="ids" item="Id" separator="," open="(" close=")">
+            #{Id}
+        </foreach>
+    </delete>
+
+    <update id="update">
+        update sky_take_out.dish
+        <set>
+            <if test="name != null and name != ''">name =#{name},</if>
+            <if test="category_id != null and category_id != ''">category_id =#{categoryId},</if>
+            <if test="price != null and price != ''">price =#{price},</if>
+            <if test="image != null and image != ''">image =#{image},</if>
+            <if test="description != null and description != ''">description =#{description},</if>
+            <if test="status != null and status != ''">status =#{status},</if>
+        </set>
+        where id = #{id}
+    </update>
+</mapper>

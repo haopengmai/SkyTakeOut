@@ -78,7 +78,7 @@ public class EmployeeController {
 
     @PostMapping
     @ApiOperation(value = "新增员工")
-    public Result<Employee> register(@RequestBody EmployeeDTO employeeDTO) {
+    public Result register(@RequestBody EmployeeDTO employeeDTO) {
         log.info("新增员工：{}", employeeDTO);
         employeeService.register(employeeDTO);
         return Result.success();
