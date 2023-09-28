@@ -12,3 +12,8 @@ sky:
     access-key-id: LTAI5t9jv6QPzBGZugDcaR19
     access-key-secret: vtBSTLbjntpHcSu8ud7R6Lrg8ilxgE
     bucket-name: web-tilas-hpmai
+
+  redis:
+    host: localhost
+    port: 6379
+    database: 10
